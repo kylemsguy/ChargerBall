@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
@@ -30,6 +31,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_ShootSound;          // the sound played when character fires gun
         [SerializeField] private float m_GunChargeSpeed = 1.0f;
         [SerializeField] private int startingPitch = 1;
+        [SerializeField] private Scrollbar m_ChargeLevelBar;
+        [SerializeField] private Rigidbody m_BulletObject;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -48,6 +51,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private float m_GunChargeLevel = 0.0f;
         [SerializeField] private bool m_isChargingGun = false;
         public float m_PitchDelta = 0.05f;
+
 
         // Use this for initialization
         private void Start()
@@ -143,6 +147,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
 
+            m_ChargeLevelBar.size = (float) m_GunChargeLevel / 100f;
+
             if (m_isChargingGun)
             {
                 if (m_GunChargeLevel == 0)
@@ -171,10 +177,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 // IF gun charge level is 0, no shooting necessary
                 if (m_GunChargeLevel > 0)
                 {
+                    float gunChargeLevel = m_GunChargeLevel;
+                    m_GunChargeLevel = 0;
                     // Shoot the gun
                     PlayShootSound();
                     // spawn bullet heading towards target porportional to m_GunChargeLevel
-                    m_GunChargeLevel = 0;
+                    SpawnBulletObject();
                 }
             }
 
@@ -202,6 +210,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             UpdateCameraPosition(speed);
 
             m_MouseLook.UpdateCursorLock();
+        }
+
+
+        private void SpawnBulletObject()
+        {
+            Vector3 pos = m_CharacterController.transform.position;
+            Vector3 look = transform.forward;
+            Rigidbody bullet = Instantiate(m_BulletObject, pos, Quaternion.identity);
+            Rigidbody bulletBody = bullet.GetComponent<Rigidbody>();
+            bulletBody.velocity = look;
         }
 
 
