@@ -315,6 +315,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void RotateView()
         {
             m_MouseLook.LookRotation (transform, m_Camera.transform);
+            //m_Camera.transform.Rotate(Input.GetAxis("RightStickHorizontal") * vector3.up * time.DeltaTime * rotateSpeed);
         }
 
 
