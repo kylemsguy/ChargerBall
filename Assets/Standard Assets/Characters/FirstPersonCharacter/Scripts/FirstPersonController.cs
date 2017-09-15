@@ -177,12 +177,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 // IF gun charge level is 0, no shooting necessary
                 if (m_GunChargeLevel > 0)
                 {
-                    float gunChargeLevel = m_GunChargeLevel;
-                    m_GunChargeLevel = 0;
                     // Shoot the gun
                     PlayShootSound();
                     // spawn bullet heading towards target porportional to m_GunChargeLevel
                     SpawnBulletObject();
+                    m_GunChargeLevel = 0;
                 }
             }
 
@@ -216,10 +215,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void SpawnBulletObject()
         {
             Vector3 pos = m_CharacterController.transform.position;
-            Vector3 look = transform.forward;
-            Rigidbody bullet = Instantiate(m_BulletObject, pos, Quaternion.identity);
+            Vector3 look = m_Camera.transform.TransformDirection(Vector3.forward);
+            Vector3 frontof = pos + look;
+            Rigidbody bullet = Instantiate(m_BulletObject, frontof, Quaternion.Euler(look));
             Rigidbody bulletBody = bullet.GetComponent<Rigidbody>();
-            bulletBody.velocity = look;
+            //bulletBody.velocity = look;
+            bulletBody.AddForceAtPosition(look * m_GunChargeLevel, pos, ForceMode.Impulse);
+
         }
 
 
