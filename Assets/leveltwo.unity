@@ -216,8 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdbfb9d66b5df24f9e30bd58ff5252b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NextSceneID: leveltwo
-  pauseDelay: 3
 --- !u!1 &346349812
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c4a8d74ff7c5f4e95f32b0deafca1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UI: {fileID: 20404514}
+  m_UI: {fileID: 0}
 --- !u!1 &449929600
 GameObject:
   m_ObjectHideFlags: 0

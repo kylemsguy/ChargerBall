@@ -217,10 +217,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Vector3 pos = m_CharacterController.transform.position;
             Vector3 look = m_Camera.transform.TransformDirection(Vector3.forward);
             Vector3 frontof = pos + look;
-            Rigidbody bullet = Instantiate(m_BulletObject, frontof, Quaternion.Euler(look));
+            Rigidbody bullet = Instantiate(m_BulletObject, frontof + Vector3.up, Quaternion.Euler(look));
             Rigidbody bulletBody = bullet.GetComponent<Rigidbody>();
             //bulletBody.velocity = look;
-            bulletBody.AddForceAtPosition(look * m_GunChargeLevel, pos, ForceMode.Impulse);
+            bulletBody.AddForceAtPosition(look * m_GunChargeLevel * 1000, pos, ForceMode.Impulse);
 
         }
 
