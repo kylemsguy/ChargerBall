@@ -31,6 +31,8 @@ public class ThanksForPlayingController : MonoBehaviour {
     {
         yield return new WaitForSecondsRealtime(1);
         HideEverythingFilter.GetComponent<Image>().CrossFadeAlpha(0, 2, true);
+        yield return new WaitForSecondsRealtime(2);
+        Destroy(HideEverythingFilter);
     }
 
     void QuitGame()
