@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/levelone.unity
     guid: 0083c25f93ec1ae49a0d83d8726f767a
+  - enabled: 1
+    path: Assets/leveltwo.unity
+    guid: 09ab862eec51bf942bf53af63bc89888
+  - enabled: 1
+    path: Assets/thanksforplaying.unity
+    guid: abf60b48f629b4444a75a29c2259f172

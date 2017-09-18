@@ -14,13 +14,13 @@ public class KillPlaneController : MonoBehaviour {
 		
 	}
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         // Check if object is of tag Player
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Ball")
         {
             // GAME OVER
-            Time.timeScale = 0;
+            UIController.GameOver = true;
         }
     }
 }

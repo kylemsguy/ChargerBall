@@ -19,7 +19,7 @@ public class GoalController : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         // Check if object is of tag Player
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Ball")
         {
             // YOU WIN
             YouWin();
